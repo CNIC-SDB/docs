@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <!-- localRepository
+   | 配置本地资源库位置.
+   |
+   | Default: ~/.m2/repository
+  <localRepository>/path/to/local/repo</localRepository>
+  本地的仓库路径
+  -->
+  <localRepository></localRepository>
+  <pluginGroups></pluginGroups>
+   
+  <proxies></proxies>
+  <!--
+	向私服注册第三方jar
+	mvn deploy:deploy-file -DgroupId=*** -DartifactId=*** -Dversion=*** -Dfile=本地jar路径 -Durl=http://10.0.83.16:8081/repository/maven-releases -DrepositoryId=nexus
+  -->
+  <servers>
+    <server>
+      <id>nexus</id>
+      <username>admin</username>
+      <password>bigdata</password>
+    </server>
+  </servers>
+  
+  <!-- mirrors
+   | 配置远程资源库位置(一般为 Apache archiva, nexus 架设的私服地址).   
+   |-->
+  <mirrors>
+	<mirror>
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://10.0.83.16:8081/repository/maven-public/</url>
+    </mirror>  
+	<mirror>  
+      <id>central</id>  
+      <name>Maven Repository Switchboard</name>  
+      <url>http://repo1.maven.org/maven2</url>  
+      <mirrorOf>central</mirrorOf>  
+    </mirror> 
+<mirror>  
+      <id>net-cn</id>  
+      <mirrorOf>central</mirrorOf>  
+      <name>Human Readable Name for this Mirror.</name>  
+      <url>http://maven.net.cn/content/groups/public/</url>   
+    </mirror>  
+<mirror>  
+      <id>ui</id>  
+      <mirrorOf>central</mirrorOf>  
+      <name>Human Readable Name for this Mirror.</name>  
+     <url>http://uk.maven.org/maven2/</url>  
+    </mirror>  
+<mirror>  
+      <id>ibiblio</id>  
+      <mirrorOf>central</mirrorOf>  
+      <name>Human Readable Name for this Mirror.</name>  
+     <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>  
+    </mirror>  
+<mirror>  
+      <id>jboss-public-repository-group</id>  
+      <mirrorOf>central</mirrorOf>  
+      <name>JBoss Public Repository Group</name>  
+     <url>http://repository.jboss.org/nexus/content/groups/public</url>  
+    </mirror>  	
+  </mirrors>  
+  
+  <!-- mirrors
+   | 配置代码质量管理平台，使用 SONAR 构建   
+   |-->
+  <profiles>
+    <profile>
+      <id>sonar</id>
+      <activation>
+            <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties> 
+        <sonar.jdbc.url>jdbc:mysql://10.0.96.119:3306/sonar</sonar.jdbc.url>
+        <sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+        <sonar.jdbc.username>sonar</sonar.jdbc.username>
+        <sonar.jdbc.password>sonar</sonar.jdbc.password>
+        <sonar.host.url>http://10.0.96.119:9000</sonar.host.url> 
+      </properties>   
+    </profile>
+  </profiles>
+   
+</settings>
